@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Navbar } from '../components/Navbar';
 import { localizer } from '../../helpers/calendarLocalizer';
@@ -12,7 +12,7 @@ import { FabAddNew } from '../components/FabAddNew';
 import { FabDelete } from '../components/FabDelete';
 
 export const CalendarPage = () => {
-  const { events, setActiveEvent } = useCalendarStore();
+  const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
   const { openDateModal } = useUiStore();
   const [lastView, setLastView] = useState(localStorage.getItem('lastView') || "week");
 
@@ -40,6 +40,11 @@ export const CalendarPage = () => {
   const onViewChanged = (event) => {
     localStorage.setItem("lastView", event);
   }
+
+  useEffect(() => {
+    startLoadingEvents();
+  }, []);
+  
 
   return (
     <>
