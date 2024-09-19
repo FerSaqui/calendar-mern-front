@@ -12,6 +12,7 @@ export const FabDelete = () => {
 
     return (
         <button
+            data-testid="btnFabDelete"
             className='btn btn-danger fab-danger'
             onClick={handleClickDelete}
             style={{
